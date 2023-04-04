@@ -1,0 +1,23 @@
+# my-composite-action/action.yml
+name: 'My Composite Action'
+description: 'A reusable set of steps'
+inputs:
+  input1:
+    description: 'First input'
+    required: true
+outputs:
+  output1:
+    description: 'First output'
+runs:
+  using: 'composite'
+  steps:
+    - name: Step 1
+      run: echo "Input: ${{ inputs.input1 }}"
+      shell: bash
+
+    - name: Step 2
+      id: step2
+      run: |
+        output_value="Output: ${{ inputs.input1 }} processed"
+        echo "::set-output name=output1::$output_value"
+      shell: bash
